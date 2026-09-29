@@ -11,8 +11,24 @@ Positive results mean the modeled public costs exceed the modeled taxes and fees
 ## Files
 
 - `index.html` contains the app structure
-- `styles.css` contains the layout and visual styling
-- `script.js` contains the estimator logic, field definitions, validation, and rendering
+- `styles.css` contains the animated layout, theme system, and visual styling
+- `script.js` contains the estimator logic, field definitions, validation, rendering, presets, and customization controls
+
+## Customization features
+
+The options menu includes a broad set of visual and interaction controls:
+
+- dark mode and light mode
+- multiple accent palettes
+- calm, playful, and turbo motion levels
+- animated ambient background effects
+- animated counters and card pulse effects
+- hover tilt interactions
+- spotlight styling for the primary result card
+- compact layout mode
+- preset fiscal scenarios
+
+Preferences and entered values are persisted in `localStorage`.
 
 ## What the app asks for
 

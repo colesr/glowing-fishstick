@@ -6,40 +6,197 @@
     <title>Public Cost Estimator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <main class="app-shell">
-      <section class="hero-panel">
+  <body data-theme="dark" data-accent="ocean" data-motion="playful" data-density="cozy">
+    <div class="ambient-scene" aria-hidden="true">
+      <div class="orb orb-one"></div>
+      <div class="orb orb-two"></div>
+      <div class="orb orb-three"></div>
+      <div class="spark-field" id="spark-field"></div>
+      <div class="grid-glow"></div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand-block">
         <p class="eyebrow">Transparent public-cost estimator</p>
-        <h1>Estimate a person&apos;s annual public cost or contribution.</h1>
-        <p class="intro">
-          This app totals user-supplied public spending categories and subtracts
-          user-supplied taxes and fees. It is a budgeting aid, not a statement of
-          a person&apos;s value.
-        </p>
-        <div class="formula-card">
-          <p class="formula-title">Modeled formula</p>
-          <p class="formula">
-            Net impact = total public costs &minus; total taxes and fees paid
+        <p class="brand-title">Fiscal Vibe Studio</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="pill-button" id="theme-toggle" type="button" aria-pressed="false">
+          Toggle light mode
+        </button>
+        <button
+          class="pill-button accent"
+          id="options-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="options-panel"
+        >
+          Customize experience
+        </button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="options-panel hidden" id="options-panel">
+        <div class="options-header">
+          <div>
+            <p class="panel-kicker">Options menu</p>
+            <h2>Dial up the liveliness</h2>
+          </div>
+          <button class="ghost-button" id="reset-options" type="button">
+            Reset options
+          </button>
+        </div>
+
+        <div class="options-grid">
+          <section class="option-card">
+            <h3>Theme and color</h3>
+            <label class="option-control">
+              <span>Theme</span>
+              <select id="theme-select">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+            <label class="option-control">
+              <span>Accent palette</span>
+              <select id="accent-select">
+                <option value="ocean">Ocean</option>
+                <option value="sunset">Sunset</option>
+                <option value="neon">Neon</option>
+                <option value="grape">Grape</option>
+              </select>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="glass-toggle" checked />
+              <span>Glass card styling</span>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="spotlight-toggle" checked />
+              <span>Spotlight the main result card</span>
+            </label>
+          </section>
+
+          <section class="option-card">
+            <h3>Motion and energy</h3>
+            <label class="option-control">
+              <span>Motion level</span>
+              <select id="motion-select">
+                <option value="calm">Calm</option>
+                <option value="playful">Playful</option>
+                <option value="turbo">Turbo</option>
+              </select>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="ambient-toggle" checked />
+              <span>Animated ambient background</span>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="counter-toggle" checked />
+              <span>Animated number counters</span>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="tilt-toggle" checked />
+              <span>Interactive hover tilt</span>
+            </label>
+          </section>
+
+          <section class="option-card">
+            <h3>Layout and flow</h3>
+            <label class="toggle-control">
+              <input type="checkbox" id="compact-toggle" />
+              <span>Compact layout density</span>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="confetti-toggle" checked />
+              <span>Celebration burst on surplus</span>
+            </label>
+            <label class="toggle-control">
+              <input type="checkbox" id="pulse-toggle" checked />
+              <span>Pulse updated fields and cards</span>
+            </label>
+            <button class="ghost-button full-width" id="reset-inputs" type="button">
+              Reset all inputs
+            </button>
+          </section>
+
+          <section class="option-card">
+            <h3>Quick preset scenarios</h3>
+            <div class="preset-list">
+              <button class="preset-button" type="button" data-preset="balanced">
+                Balanced household
+              </button>
+              <button class="preset-button" type="button" data-preset="contributor">
+                High contributor
+              </button>
+              <button class="preset-button" type="button" data-preset="support">
+                High support
+              </button>
+              <button class="preset-button" type="button" data-preset="services">
+                Services heavy
+              </button>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <section class="hero-panel tilt-surface">
+        <div class="hero-copy">
+          <div>
+            <p class="eyebrow">Transparent public-cost estimator</p>
+            <h1>Estimate a person&apos;s annual public cost or contribution.</h1>
+          </div>
+          <p class="intro">
+            This app totals user-supplied public spending categories and subtracts
+            user-supplied taxes and fees. It is a budgeting aid, not a statement of
+            a person&apos;s value.
           </p>
+          <div class="formula-card">
+            <p class="formula-title">Modeled formula</p>
+            <p class="formula">
+              Net impact = total public costs &minus; total taxes and fees paid
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-meter">
+          <div class="hero-meter-ring">
+            <span class="ring-label">Live fiscal mood</span>
+            <strong id="mood-label">Break-even</strong>
+          </div>
+          <div class="hero-meter-stats">
+            <div>
+              <span>Active categories</span>
+              <strong id="active-count">0</strong>
+            </div>
+            <div>
+              <span>Current palette</span>
+              <strong id="palette-label">Ocean</strong>
+            </div>
+            <div>
+              <span>Motion level</span>
+              <strong id="motion-label">Playful</strong>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="results-grid" aria-label="Estimate summary">
-        <article class="result-card accent">
+        <article class="result-card accent tilt-surface" id="main-result-card">
           <p class="result-label" id="net-label">Estimated annual break-even impact</p>
           <p class="result-value" id="net-value">$0</p>
           <p class="result-caption" id="net-caption">
             Costs and contributions are equal in the current model.
           </p>
         </article>
-        <article class="result-card">
+        <article class="result-card tilt-surface">
           <p class="result-label">Modeled annual public costs</p>
           <p class="result-value" id="costs-value">$0</p>
           <p class="result-caption">
             Direct benefits, shared services, and justice or emergency spending.
           </p>
         </article>
-        <article class="result-card">
+        <article class="result-card tilt-surface">
           <p class="result-label">Modeled annual taxes and fees paid</p>
           <p class="result-value" id="contributions-value">$0</p>
           <p class="result-caption">
@@ -55,9 +212,12 @@
 
       <section class="content-grid">
         <form class="estimator-form">
-          <div class="form-section">
+          <div class="form-section tilt-surface">
             <div class="section-heading">
-              <h2>Taxes and fees paid</h2>
+              <div>
+                <p class="section-kicker">Inputs</p>
+                <h2>Taxes and fees paid</h2>
+              </div>
               <p>
                 Enter annual amounts this person pays into public systems. Use
                 household-attributed values when the expense is shared.
@@ -66,9 +226,12 @@
             <div class="field-grid" id="contribution-fields"></div>
           </div>
 
-          <div class="form-section">
+          <div class="form-section tilt-surface">
             <div class="section-heading">
-              <h2>Public costs and support</h2>
+              <div>
+                <p class="section-kicker">Inputs</p>
+                <h2>Public costs and support</h2>
+              </div>
               <p>
                 Enter annualized costs funded by the public that are attributable to
                 this person or their household.
@@ -79,7 +242,7 @@
         </form>
 
         <aside class="sidebar">
-          <div class="sidebar-card">
+          <div class="sidebar-card tilt-surface">
             <h2>How to use this</h2>
             <ol>
               <li>Gather annual tax and fee amounts paid by the person.</li>
@@ -87,15 +250,15 @@
               <li>Review the totals and refine any category that feels too broad.</li>
             </ol>
           </div>
-          <div class="sidebar-card">
-            <h2>What this does not do</h2>
+          <div class="sidebar-card tilt-surface">
+            <h2>Feature highlights</h2>
             <ul>
-              <li>Infer costs from demographics or protected traits.</li>
-              <li>Claim to measure human worth or social value.</li>
-              <li>Capture every second-order economic effect.</li>
+              <li>Persistent theme, palette, and motion preferences.</li>
+              <li>Preset fiscal scenarios for fast exploration.</li>
+              <li>Animated counters, ambient effects, and interactive card tilt.</li>
             </ul>
           </div>
-          <div class="sidebar-card breakdown-card">
+          <div class="sidebar-card breakdown-card tilt-surface">
             <h2>Breakdown</h2>
             <dl>
               <div>
@@ -122,4 +285,4 @@
 
     <script src="script.js"></script>
   </body>
-  </html>
+</html>
