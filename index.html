@@ -2,12 +2,124 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Public Cost Estimator</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <main class="app-shell">
+      <section class="hero-panel">
+        <p class="eyebrow">Transparent public-cost estimator</p>
+        <h1>Estimate a person&apos;s annual public cost or contribution.</h1>
+        <p class="intro">
+          This app totals user-supplied public spending categories and subtracts
+          user-supplied taxes and fees. It is a budgeting aid, not a statement of
+          a person&apos;s value.
+        </p>
+        <div class="formula-card">
+          <p class="formula-title">Modeled formula</p>
+          <p class="formula">
+            Net impact = total public costs &minus; total taxes and fees paid
+          </p>
+        </div>
+      </section>
+
+      <section class="results-grid" aria-label="Estimate summary">
+        <article class="result-card accent">
+          <p class="result-label" id="net-label">Estimated annual break-even impact</p>
+          <p class="result-value" id="net-value">$0</p>
+          <p class="result-caption" id="net-caption">
+            Costs and contributions are equal in the current model.
+          </p>
+        </article>
+        <article class="result-card">
+          <p class="result-label">Modeled annual public costs</p>
+          <p class="result-value" id="costs-value">$0</p>
+          <p class="result-caption">
+            Direct benefits, shared services, and justice or emergency spending.
+          </p>
+        </article>
+        <article class="result-card">
+          <p class="result-label">Modeled annual taxes and fees paid</p>
+          <p class="result-value" id="contributions-value">$0</p>
+          <p class="result-caption">
+            Taxes and public fees the person already contributes back.
+          </p>
+        </article>
+      </section>
+
+      <section class="warning-banner hidden" aria-live="polite" id="warning-banner">
+        Enter zero or a positive number in every field. Invalid values are ignored
+        in the estimate until corrected.
+      </section>
+
+      <section class="content-grid">
+        <form class="estimator-form">
+          <div class="form-section">
+            <div class="section-heading">
+              <h2>Taxes and fees paid</h2>
+              <p>
+                Enter annual amounts this person pays into public systems. Use
+                household-attributed values when the expense is shared.
+              </p>
+            </div>
+            <div class="field-grid" id="contribution-fields"></div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-heading">
+              <h2>Public costs and support</h2>
+              <p>
+                Enter annualized costs funded by the public that are attributable to
+                this person or their household.
+              </p>
+            </div>
+            <div class="field-grid" id="cost-fields"></div>
+          </div>
+        </form>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h2>How to use this</h2>
+            <ol>
+              <li>Gather annual tax and fee amounts paid by the person.</li>
+              <li>Estimate annual public spending attributable to them.</li>
+              <li>Review the totals and refine any category that feels too broad.</li>
+            </ol>
+          </div>
+          <div class="sidebar-card">
+            <h2>What this does not do</h2>
+            <ul>
+              <li>Infer costs from demographics or protected traits.</li>
+              <li>Claim to measure human worth or social value.</li>
+              <li>Capture every second-order economic effect.</li>
+            </ul>
+          </div>
+          <div class="sidebar-card breakdown-card">
+            <h2>Breakdown</h2>
+            <dl>
+              <div>
+                <dt>Total public costs</dt>
+                <dd id="breakdown-costs">$0</dd>
+              </div>
+              <div>
+                <dt>Total taxes and fees</dt>
+                <dd id="breakdown-contributions">$0</dd>
+              </div>
+              <div>
+                <dt>Net impact</dt>
+                <dd id="breakdown-net">$0</dd>
+              </div>
+              <div>
+                <dt>Cost coverage ratio</dt>
+                <dd id="breakdown-ratio">N/A</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
   </body>
-</html>
+  </html>
